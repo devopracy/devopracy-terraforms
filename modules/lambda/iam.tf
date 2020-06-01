@@ -1,6 +1,6 @@
 // Configure the AWS Provider
 provider "aws" {
-  region = "us-west-2"
+  region = var.lambda-region
 }
 
 // IAM ROLES AND POLICIES
@@ -66,15 +66,15 @@ data "aws_iam_policy_document" "service-policy-doc" {
 
 // Make a role for service and have it assume the role policy: lambda can do.
 resource "aws_iam_role" "service-role" {
-  name = "service-role"
+  name = "${var.service-name}-role"
   path = "/services/"
   assume_role_policy = data.aws_iam_policy_document.service-role-doc.json
 }
 
 // Write the permissions to a policy.
 resource "aws_iam_policy" "service-policy" {
-  name = "service-policy"
-  description = "permissions for running service"
+  name = "${var.service-name}-policy"
+  description = "permissions for running ${var.service-name}"
   policy = data.aws_iam_policy_document.service-policy-doc.json
 }
 
