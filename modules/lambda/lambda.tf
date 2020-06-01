@@ -11,8 +11,8 @@ resource "aws_lambda_function" "example" {
   # "main" is the filename within the zip file (main.js) and "handler"
   # is the name of the property under which the handler function was
   # exported in that file.
-  handler = "main.handler"
-  runtime = "nodejs10.x"
+  handler = "main"
+  runtime = "go1.x"
 
   role = aws_iam_role.service-role.arn
 }
