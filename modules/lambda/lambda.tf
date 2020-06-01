@@ -1,19 +1,14 @@
 // LAMBDA
-resource "aws_lambda_function" "example" {
-  function_name = var.bin-name
+resource "aws_lambda_function" "service-lambda" {
+  function_name = "${var.service-name}-lambda"
 
   # The bucket is created in a different workspace for our lambdas.
   # It makes for better operational coupling if you can put up and tear
   # down the service without affecting the storage. Using -target is an
   # antipattern.
   s3_bucket = var.artifact-bucket-name
-
-  # "main" is the filename within the zip file (main.js) and "handler"
-  # is the name of the property under which the handler function was
-  # exported in that file.
-  handler = "main"
+  handler = var.bin-name
   runtime = "go1.x"
-
   role = aws_iam_role.service-role.arn
 }
 
