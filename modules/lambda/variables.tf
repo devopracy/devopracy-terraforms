@@ -27,3 +27,15 @@ variable "bin-name" {
   type = string
   default = ""
 }
+
+variable "api-name" {
+  description = "Name the API for the lambda."
+  type = string
+  default = ""
+}
+
+variable "api-description" {
+  description = "A brief description of the API for the console."
+  type = string
+  default = ""
+}
